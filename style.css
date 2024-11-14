@@ -1,22 +1,29 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;600;700;800;900&family=Josefin+Sans:wght@100;200;300;400;500;600;700&display=swap');
-*{
+
+
+/* Font Imports */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=Nunito:wght@200;300;400;500;600;700;800;900&family=Josefin+Sans:wght@100;200;300;400;500;600;700&display=swap');
+
+/* Universal and Base Styles */
+* {
     box-sizing: border-box;
     padding: 0;
     margin: 0;
-    background-color:rgb(3,2,3);
+}
 
+body {
+    background-color: rgb(3, 2, 3);
+    color: #f0e4f1;
+    font-family: 'Space Grotesk', sans-serif;
 }
-li, a, button{
-    font-family: "Space Grotesk", sans-serif;
-    font-weight:600;
-    font-size:16px;
-    color:#f0e4f1;
+
+li, a, button {
+    font-weight: 600;
+    font-size: 16px;
+    color: #f0e4f1;
     text-decoration: none;
-    
 }
+
+/* Header and Navigation */
 header {
     display: flex;
     justify-content: space-between; 
@@ -24,120 +31,125 @@ header {
     padding: 10px 20px; 
     position: fixed;
     top: 0;
-    width: 100%; 
+    width: 100%;
     background-color: rgb(3, 2, 3); 
-    z-index: 1000; 
+    z-index: 1000;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
-.logo{
+.logo {
     cursor: pointer;
     margin-right: auto;
 }
-.nav_links{
-    list-style: none;
 
-    
-    
+.nav_links {
+    list-style: none;
 }
-.nav_links li{
+
+.nav_links li {
     display: inline-block;
-    padding: 0px 20px;
+    padding: 0 20px;
 }
-.nav_links li a{
-    transition: all 0.3s ease 0s;
+
+.nav_links li a {
+    transition: color 0.3s ease;
 }
-.nav_links li a:hover{
-    color:#913592;
+
+.nav_links li a:hover {
+    color: #913592;
 }
-button{
+
+button {
     padding: 9px 25px;
-    background-color: rgba(160, 73, 162,1);
+    background-color: rgba(160, 73, 162, 1);
     border: none;
     border-radius: 50px;
     cursor: pointer;
-    transition: all 0.3s ease 0s;
+    transition: background-color 0.3s ease;
 }
-button:hover{
-    background-color: rgba(160, 73, 162,0.8);
 
+button:hover {
+    background-color: rgba(160, 73, 162, 0.8);
 }
-.login_screen{
+
+/* Login Screen */
+.login_screen {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    
-    
     width: 400px;
     position: absolute;
-    background-color:rgba(58, 41, 58, 1);
+    background-color: rgba(58, 41, 58, 1);
     border-radius: 6px;
-    transform: translate(-50%,-50%) scale(0.1);
-    top:0;
+    transform: translate(-50%, -50%) scale(0.1);
+    top: 0;
     left: 50%;
     height: 150px;
-    
     text-align: center;
-    /* color:#612762; */
-    padding: 0px 30px 30px;
+    padding: 0 30px 30px;
     visibility: hidden;
-    transition: transform 0.4s,top 0.4s;
-    
-}
-.login_screen h3 ,.login_screen input{
-    background-color: rgba(58, 41, 58, 1);
-    font-family: "Space Grotesk", sans-serif;
-    font-weight:600;
-    font-size:16px;
-    color:#f0e4f1;
-    text-decoration: none;
-    
-}
-login_screen h3 {
-    font-size: 20px;
-}
-.open-login_screen{
-    top:50%;
-    visibility:visible ;
-    transform: translate(-50%,-50%) scale(1);
+    transition: transform 0.4s, top 0.4s;
 }
 
-.home{
-    
+.login_screen h3, .login_screen input {
+    font-family: "Space Grotesk", sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    background-color: rgba(58, 41, 58, 1);
+    color: #f0e4f1;
+}
+
+.login_screen h3 {
+    font-size: 20px;
+}
+
+.open-login_screen {
+    top: 50%;
+    visibility: visible;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+/* Sections */
+.home {
     height: 80vh;
     width: 100%;
 }
-.nologin{
+
+.nologin {
     color: #f0e4f1;
     padding: 200px;
     font-size: 40px;
-    font-family: "Space Grotesk", sans-serif;
+    text-align: center;
+}
 
-}
-html{
-    scroll-behavior: smooth;
-}
-p{
+/* Typography */
+p {
     font-family: 'Josefin Sans', sans-serif;
-    font-size:24px;
+    font-size: 24px;
 }
-span{
-    color:#913592;
-    
+
+span {
+    color: #913592;
 }
-#logoname{
+
+/* Logo Name */
+#logoname {
     font-family: "Space Grotesk", sans-serif;
-    color: #f0e4f1;
     font-size: 30px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-#logoname p{
+
+#logoname p {
     font-size: 30px;
 }
-#ecgChart{
-    border: 1px white solid;
+
+/* ECG Chart */
+#ecgChart {
+    border: 1px solid white;
     padding: 10px;
-    margin: 10px;
+    margin: 10px auto;
+    display: block;
+    max-width: 600px;
 }
