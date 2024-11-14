@@ -16,8 +16,8 @@ async function fetchECGData() {
         addData(myChart, data.ecg_value);
     } catch (error) {
         console.error("Error fetching data:", error);
-        document.getElementById("ecg_value").innerText = "Error";
-        document.getElementById("status").innerText = "Error";
+        document.getElementById("ecg_value").innerText = "Error-Ecg-value";
+        document.getElementById("status").innerText = "Error-status";
     }
 }
 

@@ -134,6 +134,10 @@ span{
     align-items: center;
 }
 #logoname p{
-    
     font-size: 30px;
+}
+#ecgChart{
+    border: 1px white solid;
+    padding: 10px;
+    margin: 10px;
 }
