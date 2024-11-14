@@ -1,11 +1,59 @@
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ecg-tester</title>
+    <title>ECG</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+   
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+   
 </head>
 <body>
-    
+    <header>
+        <div class="logo" style="display: flex;">
+            <img src="img/ecgdark.png" alt="logo" style="transform: scale(0.36);">
+            <h3 id="logoname">Pu<p style="color: #d165d3;">l</p>se<p style="color: #d165d3;">L</p>inK</h3>
+        </div>
+
+        <nav>
+            <ul class="nav_links" id="nav_bar">
+                <li><a href='#home'>Home</a></li>
+                <li><a href='#project'>Project</a></li>
+            </ul>
+        </nav>
+        <button>Welcome</button>
+    </header>
+
+    <section id="home">
+        <div class="nologin">
+            <h1>Welcome to the ECG Monitoring System</h1>
+            <h2>Track your heart activity in real time</h2>
+        </div>
+    </section>
+
+    <section id="project" style="color: #f0e4f1;padding: 120px;">
+        <h1 style="font-family: 'Nunito', sans-serif; font-size: 80px;color:#d165d3;text-decoration: underline;text-decoration-color: #18ecd0;">Project</h1>
+        <p>Our project is designed to develop a real-time <span>ECG</span> (Electrocardiogram) monitoring system utilizing a Raspberry Pi as the central processing unit. This innovative system captures ECG readings from sensors connected via Bluetooth, ensuring a seamless and wireless data transfer process. The <span>Raspberry Pi</span> processes the raw ECG data, formatting it for accurate display and analysis.</p>
+        <br>
+        <p>To enhance user security, we have implemented a <span>unique login ID</span> for each device, guaranteeing that only authorized personnel can access sensitive health information. The processed ECG readings are then hosted on a dedicated website, which provides an intuitive and user-friendly platform for medical professionals and users to monitor heart activity remotely. The website is built using web development technologies such as HTML, CSS, and JavaScript, enabling clear and engaging visualization of the ECG data in real-time.</p>
+        <br>
+        <p>Additionally, our project aims to provide essential features like data logging and the ability to track historical ECG readings over time, which can be beneficial for medical assessments. Future enhancements could include developing a mobile application for convenient access on the go and implementing alert systems to notify users of any critical conditions detected in the ECG readings.</p>
+        <br>
+        <p>Overall, this ECG monitoring system not only promotes better health monitoring but also leverages <span>modern technology</span> to improve accessibility and security in medical data management.</p>
+    </section>
+
+   
+
+    <section id="ecg_monitor">
+        <h2>ECG Monitor</h2>
+        <p>ECG Value: <span id="ecg_value">Loading...</span></p>
+        <p>Status: <span id="status">Loading...</span></p>
+        <canvas id="ecgChart" width="400" height="200"></canvas>
+    </section>
 </body>
 </html>
