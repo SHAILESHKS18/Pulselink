@@ -1,10 +1,32 @@
 
 
 
-// ECG Data Fetching and Chart Display Code
+
+// Function to get the local IP address of the Pi
+async function getLocalIP() {
+    try {
+        const response = await fetch("http://localhost:5000/get_ip"); // You should have a route in your Pi's server to send the local IP address
+        if (!response.ok) {
+            throw new Error("Network response was not ok");
+        }
+        const data = await response.json();
+        return data.ip; // Assume the Pi sends back the IP address in JSON
+    } catch (error) {
+        console.error("Error fetching IP address:", error);
+        return null;
+    }
+}
+
+// Function to fetch ECG data using the dynamic IP
 async function fetchECGData() {
     try {
-        const response = await fetch("http://192.168.1.XX:5000/ecg_data"); // Replace with your Pi's IP
+        const localIP = await getLocalIP(); // Get the Pi's local IP dynamically
+        if (!localIP) {
+            throw new Error("Unable to get local IP address");
+        }
+        
+        // Now we use the dynamic IP address to fetch ECG data
+        const response = await fetch(`http://${localIP}:5000/ecg_data`);
         if (!response.ok) {
             throw new Error("Network response was not ok");
         }
