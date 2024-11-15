@@ -1,35 +1,39 @@
+// Function to get the local IP address of the Pi with retry logic
 
 
 
-
-// Function to get the local IP address of the Pi
-async function getLocalIP() {
+async function getLocalIP(retryCount = 3) {
     try {
-        const response = await fetch("http://localhost:5000/get_ip"); // You should have a route in your Pi's server to send the local IP address
-        if (!response.ok) {
-            throw new Error("Network response was not ok");
-        }
+        const response = await fetch("http://localhost:5000/get_ip");
+        if (!response.ok) throw new Error("Network response was not ok");
+
         const data = await response.json();
         return data.ip; // Assume the Pi sends back the IP address in JSON
     } catch (error) {
         console.error("Error fetching IP address:", error);
-        return null;
+
+        if (retryCount > 0) {
+            console.log(`Retrying to get IP... (${3 - retryCount + 1}/3)`);
+            await new Promise(resolve => setTimeout(resolve, 2000)); // 2-second delay
+            return await getLocalIP(retryCount - 1); // Retry
+        } else {
+            console.error("Failed to get IP address after multiple attempts.");
+            document.getElementById("status").innerText = "Error: Unable to retrieve IP";
+            return null;
+        }
     }
 }
 
-// Function to fetch ECG data using the dynamic IP
-async function fetchECGData() {
+// Function to fetch ECG data using the dynamic IP with retry logic
+async function fetchECGData(retryCount = 3) {
     try {
-        const localIP = await getLocalIP(); // Get the Pi's local IP dynamically
-        if (!localIP) {
-            throw new Error("Unable to get local IP address");
-        }
-        
-        // Now we use the dynamic IP address to fetch ECG data
+        const localIP = await getLocalIP();
+        if (!localIP) throw new Error("Unable to get local IP address");
+
+        // Fetch ECG data using the retrieved IP
         const response = await fetch(`http://${localIP}:5000/ecg_data`);
-        if (!response.ok) {
-            throw new Error("Network response was not ok");
-        }
+        if (!response.ok) throw new Error("Network response was not ok");
+
         const data = await response.json();
         document.getElementById("ecg_value").innerText = data.ecg_value;
         document.getElementById("status").innerText = data.status;
@@ -37,9 +41,16 @@ async function fetchECGData() {
         // Update the chart with the new ECG data point
         addData(myChart, data.ecg_value);
     } catch (error) {
-        console.error("Error fetching data:", error);
-        document.getElementById("ecg_value").innerText = "Error-Ecg-value";
-        document.getElementById("status").innerText = "Error-status";
+        console.error("Error fetching ECG data:", error);
+        document.getElementById("ecg_value").innerText = "Error: ECG Value";
+        document.getElementById("status").innerText = "Error: Status";
+
+        if (retryCount > 0) {
+            console.log(`Retrying to fetch ECG data... (${3 - retryCount + 1}/3)`);
+            setTimeout(() => fetchECGData(retryCount - 1), 2000); // Retry after 2 seconds
+        } else {
+            console.error("Failed to retrieve ECG data after multiple attempts.");
+        }
     }
 }
 
@@ -85,7 +96,8 @@ function addData(chart, value) {
     const currentTime = new Date().toLocaleTimeString(); // Current time label
     chart.data.labels.push(currentTime); // Add time label
     chart.data.datasets[0].data.push(value); // Add ECG data point
-    if (chart.data.labels.length > 20) { // Keep only the latest 20 points
+
+    if (chart.data.labels.length > 20) { // Limit to the latest 20 points
         chart.data.labels.shift();
         chart.data.datasets[0].data.shift();
     }
